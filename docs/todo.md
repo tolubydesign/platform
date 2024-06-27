@@ -18,8 +18,10 @@ Ways to improve repository and code.
   - [ ] Convert database management to use postgresql requests
   - [ ] Create scripts to create database template on initial start
 - [ ] Create single script to start database and backend server
+- [ ] Create register endpoint
 
 ### Front-end
 
 - [ ] Update UI
 - [ ] Add dark mode
+- [ ] Create register user page/form
