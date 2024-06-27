@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "rootDirs": ["src"],
+    "outDir": "dist",
+    "lib": ["es2020"],
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "Node",
+
+    
+    "rootDir": "./",
+    "esModuleInterop": true,
+    "strict": true,
+    "sourceMap": false,
+    "baseUrl": "./",
+    "paths": {
+			"@/*": [
+				"./src/*"
+			],
+			"@shared/*": [
+				"./src/shared/*"
+			],
+			"@postgres/*": [
+				"src/postgres/*"
+			],
+			"@middleware/*": [
+				"./src/middleware/*"
+			],
+			"@models/*": [
+				"./src/models/*"
+			],
+		},
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
