@@ -31,4 +31,6 @@ When the page is running you'll see a page like this, when you go to `http://loc
 ![Screenshot of the Login Page](/public/login-screenshot.jpg)
 _Screenshot of the Login Page_
 
+## Additional Information
 
+A list of task needed to be developed can be found here [TODO List](docs/todo.md).
