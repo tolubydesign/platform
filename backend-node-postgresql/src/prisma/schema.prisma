@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  user
+  admin
+}
+
+model Account {
+  user_id      String    @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username     String    @db.VarChar(50)
+  password     String    @db.VarChar()
+  account_type Role      @default(user)
+  user_group   String    @db.VarChar()
+  email        String    @unique @db.VarChar()
+  phone        String?   @db.VarChar()
+
+  messages     Message[] @relation("ChatMessages")
+  channel      Channel[] @relation("ChatCreator")
+  projectOwner Project[] @relation("ProjectOwner")
+  user         File[]    @relation(name: "FileUploader")
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  username   String   @db.VarChar(50)
+  createdAt  DateTime @default(now())
+  user_email String?  @db.VarChar()
+  channel_id Int?
+  message    String
+  user       Account? @relation(name: "ChatMessages", fields: [user_email], references: [email])
+  channel    Channel? @relation(name: "MessageChannel", fields: [channel_id], references: [id])
+
+  @@unique([id])
+}
+
+model Channel {
+  id         Int       @id @unique @default(autoincrement())
+  name       String    @unique
+  creator_id String?   @db.Uuid
+  messages   Message[] @relation(name: "MessageChannel")
+  user       Account?  @relation(name: "ChatCreator", fields: [creator_id], references: [user_id])
+
+  @@unique([id, name])
+}
+
+model File {
+  serverFileName   String   @id @unique @db.Text
+  uploadedFileName String   @db.Text
+  dir              String   @db.VarChar()
+  mimetype         String   @db.VarChar(90)
+  encoding         String   @db.VarChar(10)
+  uploadedAt       DateTime @default(now())
+  project_id       Int?
+  creator          String?  @db.VarChar()
+
+  project Project? @relation(name: "ProjectFiles", fields: [project_id], references: [id])
+  user    Account? @relation(name: "FileUploader", fields: [creator], references: [email])
+}
+
+model Project {
+  id            Int      @id @unique @default(autoincrement())
+  project_name  String   @unique @db.VarChar()
+  creator_email String?  @db.VarChar()
+  createdAt     DateTime @default(now())
+  participants  String[] @db.VarChar()
+
+  files         File[]   @relation(name: "ProjectFiles")
+  creator Account? @relation(name: "ProjectOwner", fields: [creator_email], references: [email])
+}

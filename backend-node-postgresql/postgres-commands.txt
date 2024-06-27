@@ -1,0 +1,48 @@
+Add information to Database
+
+INSERT INTO accounts (
+    username,
+    password,
+    account_type,
+	user_group,
+    email,
+	phone
+)
+VALUES
+    (
+        'John',
+		'password1',
+		'admin',
+		'',
+        'john.smith@example.com',
+        '408-237-2345'
+    ),
+    (
+        'Mike Wazowski',
+        'password2',
+		'admin',
+		'',
+        'mike.wazowski@example.com',
+        '408-237-2344'
+    ),
+    (
+        'Alex',
+        'password3',
+		'user',
+		'',
+        'alex.smith@example.com',
+        '408-237-2343'
+    ),
+    (
+        'Avery Johnson',
+        'password1',
+		'user',
+		'',
+        'johnson.avery@example.com',
+        '408-237-2343'
+    );
+
+
+access database --> http://localhost:5555/ --> npx prisma studio
+
+update prisma --> npx prisma migrate dev --name init

@@ -1,0 +1,112 @@
+Apollo Requests
+
+query GetAccountQuery($email: String!) {
+  getAccount(email: $email) {
+    username
+    email
+    account_type
+    phone
+    password
+  }
+}
+variable: {
+  "email": "mike.wazowski@example.com"
+}
+
+==> {
+  "data": {
+    "getAccount": {
+      "username": "Mike Wazowski",
+      "email": "mike.wazowski@example.com",
+      "account_type": "admin",
+      "phone": "408-237-2344",
+      "password": "password2"
+    }
+  }
+}
+
+_____
+
+query AllAccountsQuery {
+  accounts {
+    account_type
+    email
+    phone
+  }
+} ==> {
+  "data": {
+    "accounts": [
+      {
+        "account_type": "admin",
+        "email": "john.smith@example.com",
+        "phone": "408-237-2345"
+      },
+      {
+        "account_type": "admin",
+        "email": "mike.wazowski@example.com",
+        "phone": "408-237-2344"
+      },
+      {
+        "account_type": "user",
+        "email": "alex.smith@example.com",
+        "phone": "408-237-2343"
+      },
+      {
+        "account_type": "user",
+        "email": "johnson.avery@example.com",
+        "phone": "408-237-2343"
+      }
+    ]
+  }
+}
+
+_____
+
+query Query {
+  books {
+    author
+  }
+} ==> {
+  "data": {
+    "books": [
+      {
+        "author": "Kate Chopin"
+      },
+      {
+        "author": "Paul Auster"
+      }
+    ]
+  }
+}
+
+
+_____
+mutation CreateAccount(
+  $email: String!,
+  $username: String!,
+  $password: String!,
+  $accountType: String,
+  $userGroup: String
+) {
+  createAccount(email: $email, username: $username, password: $password, account_type: $accountType, user_group: $userGroup) {
+    email,
+    username
+  }
+} - {
+  "username": "Sam Fisher",
+  "password": "pasword5",
+  "email": "sam.fisher@example.com",
+  "accountType": "user",
+  "userGroup": "",
+} ==> {
+  "data": {
+    "createAccount": {
+      "email": "sam.fisher@example.com",
+      "username": "Sam Fisher"
+    }
+  }
+}
+
+
+
+
