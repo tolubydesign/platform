@@ -85,3 +85,6 @@ coverage
 # docker databases
 **/minio_storage
 **/db
+
+# Backend
+backend-node-postgresql/public/upload/**
