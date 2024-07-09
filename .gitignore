@@ -87,4 +87,5 @@ coverage
 **/db
 
 # Backend
-backend-node-postgresql/public/upload/**
+/backend-node-postgresql/public/upload
+/backend-node-postgresql/public/downloads
